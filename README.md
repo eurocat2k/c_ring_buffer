@@ -2,9 +2,9 @@
 Ring buffer written In C useful ADT for system programming. In my case various TCP clients use this facility to reconstruct segmented data packages.
 
 ### About 1st variant test program
-1. Create a circular buffer object - with its buffer as well - on the heap (size: 16 octets).
-2. Push 5 characters into the buffer: 'A'..'E'. Display buffer's attributes and contents.
-3. Pop off 3 octets and check the buffer contents again.
+0. Create a circular buffer object - with its buffer as well - on the heap (size: 16 octets).
+   Push 5 characters into the buffer: 'A'..'E'. Display buffer's attributes and contents.
+1. Peek then pop off 3 octets and check the buffer contents again.
 4. Push another 5 characters - following english alphabets - into the buffer.
 5. Check its content again.
 6. Pop off two octets and display buffer.
@@ -16,11 +16,11 @@ Ring buffer written In C useful ADT for system programming. In my case various T
 
 ### Build and run 1st variant
 ```
-cc -g -o test test.c circbuf.c hexdump.c && ./test
+cc -O2 -g test.c circbuf.c hexdump.c -o test && ./test
 ```
 **Expected output**
 ```
-0. Size: 16, Usage: 5
+Step 1: After pushed 5 characters. Size: 16, Usage: 5
 Circular_Buffer: A|B|C|D|E|_|_|_|_|_|_|_|_|_|_|_| <size 16 dataSize:5>
 ====== =======================   =======================  ================
 OFFSET 00 01 02 03 04 05 06 07   08 09 0A 0B 0C 0D 0E 0F  ASCII...........
@@ -29,8 +29,8 @@ OFFSET 00 01 02 03 04 05 06 07   08 09 0A 0B 0C 0D 0E 0F  ASCII...........
 000010                                                      
 ====== =======================   =======================  ================
 
-1. Size: 16, Usage: 2
-        popped out: ABC
+Step 2: After popped off 3 characters. Size: 16, Usage: 2
+        popped out: [ ABC ]
 Circular_Buffer: _|_|_|D|E|_|_|_|_|_|_|_|_|_|_|_| <size 16 dataSize:2>
 ====== =======================   =======================  ================
 OFFSET 00 01 02 03 04 05 06 07   08 09 0A 0B 0C 0D 0E 0F  ASCII...........
@@ -39,7 +39,7 @@ OFFSET 00 01 02 03 04 05 06 07   08 09 0A 0B 0C 0D 0E 0F  ASCII...........
 000010                                                      
 ====== =======================   =======================  ================
 
-1. Size: 16, Usage: 7
+Step 3: After pushed another 5 characters. Size: 16, Usage: 7
 Circular_Buffer: _|_|_|D|E|F|G|H|I|J|_|_|_|_|_|_| <size 16 dataSize:7>
 ====== =======================   =======================  ================
 OFFSET 00 01 02 03 04 05 06 07   08 09 0A 0B 0C 0D 0E 0F  ASCII...........
@@ -48,8 +48,8 @@ OFFSET 00 01 02 03 04 05 06 07   08 09 0A 0B 0C 0D 0E 0F  ASCII...........
 000010                                                      
 ====== =======================   =======================  ================
 
-2. Size: 16, Usage: 5
-        popped out: DE
+Step 4: After popped off 2 characters. Size: 16, Usage: 5
+        popped out: [ DE ]
 Circular_Buffer: _|_|_|_|_|F|G|H|I|J|_|_|_|_|_|_| <size 16 dataSize:5>
 ====== =======================   =======================  ================
 OFFSET 00 01 02 03 04 05 06 07   08 09 0A 0B 0C 0D 0E 0F  ASCII...........
@@ -58,7 +58,7 @@ OFFSET 00 01 02 03 04 05 06 07   08 09 0A 0B 0C 0D 0E 0F  ASCII...........
 000010                                                      
 ====== =======================   =======================  ================
 
-3. Size: 16, Usage: 10
+Step 5: After pushed another 5 characters. Size: 16, Usage: 10
 Circular_Buffer: _|_|_|_|_|F|G|H|I|J|K|L|M|N|O|_| <size 16 dataSize:10>
 ====== =======================   =======================  ================
 OFFSET 00 01 02 03 04 05 06 07   08 09 0A 0B 0C 0D 0E 0F  ASCII...........
@@ -67,7 +67,7 @@ OFFSET 00 01 02 03 04 05 06 07   08 09 0A 0B 0C 0D 0E 0F  ASCII...........
 000010                                                      
 ====== =======================   =======================  ================
 
-4. Size: 16, Usage: 14
+Step 6: And Another 4 characters pushed into. Size: 16, Usage: 14
 Circular_Buffer: Q|R|S|_|_|F|G|H|I|J|K|L|M|N|O|P| <size 16 dataSize:14>
 ====== =======================   =======================  ================
 OFFSET 00 01 02 03 04 05 06 07   08 09 0A 0B 0C 0D 0E 0F  ASCII...........
@@ -76,8 +76,8 @@ OFFSET 00 01 02 03 04 05 06 07   08 09 0A 0B 0C 0D 0E 0F  ASCII...........
 000010                                                      
 ====== =======================   =======================  ================
 
-5. Size: 16, Usage: 8
-        popped out: FGHIJK
+Step 7: After popped out 6 characters. Size: 16, Usage: 8
+        popped out: [ FGHIJK ]
 Circular_Buffer: Q|R|S|_|_|_|_|_|_|_|_|L|M|N|O|P| <size 16 dataSize:8>
 ====== =======================   =======================  ================
 OFFSET 00 01 02 03 04 05 06 07   08 09 0A 0B 0C 0D 0E 0F  ASCII...........
@@ -86,8 +86,8 @@ OFFSET 00 01 02 03 04 05 06 07   08 09 0A 0B 0C 0D 0E 0F  ASCII...........
 000010                                                      
 ====== =======================   =======================  ================
 
-6. Size: 16, Usage: 2
-        popped out: LMNOPQ
+Step 8: After popped out 6 characters. Size: 16, Usage: 2
+        popped out: [ LMNOPQ ]
 Circular_Buffer: _|R|S|_|_|_|_|_|_|_|_|_|_|_|_|_| <size 16 dataSize:2>
 ====== =======================   =======================  ================
 OFFSET 00 01 02 03 04 05 06 07   08 09 0A 0B 0C 0D 0E 0F  ASCII...........
@@ -96,8 +96,8 @@ OFFSET 00 01 02 03 04 05 06 07   08 09 0A 0B 0C 0D 0E 0F  ASCII...........
 000010                                                      
 ====== =======================   =======================  ================
 
-7. Size: 16, Usage: 0
-        popped out: RS
+Step 9: After popped out the remaining characters. Size: 16, Usage: 0
+        popped out: [ RS ]
 Circular_Buffer: _|_|_|_|_|_|_|_|_|_|_|_|_|_|_|_| <size 16 dataSize:0>
 ====== =======================   =======================  ================
 OFFSET 00 01 02 03 04 05 06 07   08 09 0A 0B 0C 0D 0E 0F  ASCII...........
@@ -105,6 +105,7 @@ OFFSET 00 01 02 03 04 05 06 07   08 09 0A 0B 0C 0D 0E 0F  ASCII...........
 000000 51 52 53 44 45 46 47 48   49 4A 4B 4C 4D 4E 4F 50  QRSDEFGHIJKLMNOP
 000010                                                      
 ====== =======================   =======================  ================
+
 ```
 
 ## 1 Variant
