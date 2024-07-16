@@ -130,8 +130,9 @@ extern size_t Circular_Buf_GetDataSize(cbuf_handle_t cBuf) {
 }
 
 extern void Circular_Buf_Push(cbuf_handle_t cBuf, void *src, size_t length) {
-    if (length == 0)
+    if (length == 0) {
         return;
+    }
 
     size_t writableLen = length;
     void *pSrc = src;
@@ -199,8 +200,9 @@ size_t inter_circular_buf_read(cbuf_handle_t cBuf, size_t length, void *dataOut,
 
     size_t rdLen = length;
 
-    if (cBuf->dataSize < rdLen)
+    if (cBuf->dataSize < rdLen) {
         rdLen = cBuf->dataSize;
+    }
 
     if (cBuf->headOffset <= cBuf->tailOffset) {
         if (dataOut) {
@@ -246,8 +248,9 @@ size_t inter_circular_buf_read(cbuf_handle_t cBuf, size_t length, void *dataOut,
         }
     }
 
-    if (resetHead)
+    if (resetHead) {
         cBuf->dataSize -= rdLen;
+    }
 
     return rdLen;
 }
