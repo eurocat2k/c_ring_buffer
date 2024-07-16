@@ -1,6 +1,50 @@
 # C ring-buffer
 Ring buffer written In C useful ADT for system programming. In my case various TCP clients use this facility to reconstruct segmented data packages.
 
+### About 1st variant test program
+1. Create a circular buffer object - with its buffer as well - on the heap (size: 16 octets).
+2. Push 5 characters into the buffer: 'A'..'E'. Display buffer's attributes and contents.
+3. Pop off 3 octets and check the buffer contents again.
+4. Push another 5 characters - following english alphabets - into the buffer.
+5. Check its content again.
+6. Pop off two octets and display buffer.
+7. Push another five characters, then another four.
+8. Display buffer.
+9. Pop off six characters, then display buffer and the popped out data as well.
+10. Pop off the remaining characters from the buffer and display both buffer, and output again.
+11. Free circular buffer object then exit from the program.
+
+### Build and run 1st variant
+```
+cc -g -O2 -o testv1 testv1.c circbuf.c && ./testv1
+```
+**Expected output**
+```
+0. Size: 16, Usage: 5
+Circular_Buffer: A|B|C|D|E|_|_|_|_|_|_|_|_|_|_|_| <size 16 dataSize:5>
+1. Size: 16, Usage: 2
+        popped out: ABC
+Circular_Buffer: _|_|_|D|E|_|_|_|_|_|_|_|_|_|_|_| <size 16 dataSize:2>
+1. Size: 16, Usage: 7
+Circular_Buffer: _|_|_|D|E|F|G|H|I|J|_|_|_|_|_|_| <size 16 dataSize:7>
+2. Size: 16, Usage: 5
+        popped out: DE
+Circular_Buffer: _|_|_|_|_|F|G|H|I|J|_|_|_|_|_|_| <size 16 dataSize:5>
+3. Size: 16, Usage: 10
+Circular_Buffer: _|_|_|_|_|F|G|H|I|J|K|L|M|N|O|_| <size 16 dataSize:10>
+4. Size: 16, Usage: 14
+Circular_Buffer: Q|R|S|_|_|F|G|H|I|J|K|L|M|N|O|P| <size 16 dataSize:14>
+5. Size: 16, Usage: 8
+        popped out: FGHIJK
+Circular_Buffer: Q|R|S|_|_|_|_|_|_|_|_|L|M|N|O|P| <size 16 dataSize:8>
+6. Size: 16, Usage: 2
+        popped out: LMNOPQ
+Circular_Buffer: _|R|S|_|_|_|_|_|_|_|_|_|_|_|_|_| <size 16 dataSize:2>
+7. Size: 16, Usage: 0
+        popped out: RS
+Circular_Buffer: _|_|_|_|_|_|_|_|_|_|_|_|_|_|_|_| <size 16 dataSize:0>
+```
+
 ## 1 Variant
 
 **circbuf.h**
