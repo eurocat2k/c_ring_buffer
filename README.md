@@ -412,6 +412,8 @@ extern void Circular_Buf_Print(cbuf_handle_t cBuf, bool hex) {
             Circular_Buf_GetSize(cBuf), Circular_Buf_GetDataSize(cBuf));
 
     free(str);
+    //
+    HexDump(cBuf->buffer, cBuf->size);
 }
 ```
 
