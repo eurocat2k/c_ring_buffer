@@ -195,8 +195,9 @@ extern void Circular_Buf_Push(cbuf_handle_t cBuf, void *src, size_t length) {
 
 size_t inter_circular_buf_read(cbuf_handle_t cBuf, size_t length, void *dataOut,
                                bool resetHead) {
-    if (cBuf->dataSize == 0 || length == 0)
+    if (cBuf->dataSize == 0 || length == 0) {
         return 0;
+    }
 
     size_t rdLen = length;
 
