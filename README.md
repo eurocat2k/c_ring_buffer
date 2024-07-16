@@ -68,7 +68,6 @@ extern void Circular_Buf_Print(cbuf_handle_t cBuf, bool hex);
 ```
 **circbuf.c**
 ```C
-
 #include "circbuf.h"
 #include <stdbool.h>
 #include <stdlib.h>
@@ -228,12 +227,14 @@ size_t inter_circular_buf_read(cbuf_handle_t cBuf, size_t length, void *dataOut,
             }
         } else {
             size_t frg1Len = cBuf->size - cBuf->headOffset;
-            if (dataOut)
+            if (dataOut) {
                 memcpy(dataOut, &cBuf->buffer[cBuf->headOffset], frg1Len);
+            }
 
             size_t frg2len = rdLen - frg1Len;
-            if (dataOut)
+            if (dataOut) {
                 memcpy(dataOut + frg1Len, cBuf->buffer, frg2len);
+            }
 
             if (resetHead) {
                 cBuf->headOffset = frg2len;
@@ -261,7 +262,6 @@ extern size_t Circular_Buf_Read(cbuf_handle_t cBuf, size_t length,
     return inter_circular_buf_read(cBuf, length, dataOut, false);
 }
 
-// use this for string buffers only
 // print circular buffer's content into str,
 extern void Circular_Buf_Print(cbuf_handle_t cBuf, bool hex) {
     char *b = cBuf->buffer;
@@ -298,7 +298,7 @@ extern void Circular_Buf_Print(cbuf_handle_t cBuf, bool hex) {
         }
     }
 
-    fprintf(stdout, "Circular_Buffer: %s <size %zu dataSize:%zu>\n", str,
+    printf("Circular_Buffer: %s <size %zu dataSize:%zu>\n", str,
             Circular_Buf_GetSize(cBuf), Circular_Buf_GetDataSize(cBuf));
 
     free(str);
