@@ -3,16 +3,15 @@ Ring buffer written In C useful ADT for system programming. In my case various T
 
 ### About 1st variant test program
 0. Create a circular buffer object - with its buffer as well - on the heap (size: 16 octets).
-   Push 5 characters into the buffer: 'A'..'E'. Display buffer's attributes and contents.
-1. Peek then pop off 3 octets and check the buffer contents again.
-4. Push another 5 characters - following english alphabets - into the buffer.
-5. Check its content again.
-6. Pop off two octets and display buffer.
-7. Push another five characters, then another four.
-8. Display buffer.
-9. Pop off six characters, then display buffer and the popped out data as well.
-10. Pop off the remaining characters from the buffer and display both buffer, and output again.
-11. Free circular buffer object then exit from the program.
+1. Push 5 characters into the buffer: 'A'..'E'. Display buffer's attributes and contents.
+2. Pop off 2 characters and print buffer.
+3. Push 5 characters into buffer and print.
+4. Pop off 2 characters then print.
+5-6. Push total 9 characters and print.
+7-8. Pop off total 12 characters and print.
+9. Pop off the remaining (2) characters and print.
+10. Free up cbuffer object, and return from the program.
+
 
 ### Build and run 1st variant
 ```
