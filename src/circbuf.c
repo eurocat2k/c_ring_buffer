@@ -1,9 +1,10 @@
 
 #include "circbuf.h"
+#include "hexdump.h"
 #include <stdbool.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <stdio.h>
 
 struct circular_buf_t {
     size_t size;       // capacity bytes size
@@ -61,8 +62,9 @@ extern size_t Circular_Buf_GetDataSize(cbuf_handle_t cBuf) {
 }
 
 extern void Circular_Buf_Push(cbuf_handle_t cBuf, void *src, size_t length) {
-    if (length == 0)
+    if (length == 0) {
         return;
+    }
 
     size_t writableLen = length;
     void *pSrc = src;
@@ -125,13 +127,15 @@ extern void Circular_Buf_Push(cbuf_handle_t cBuf, void *src, size_t length) {
 
 size_t inter_circular_buf_read(cbuf_handle_t cBuf, size_t length, void *dataOut,
                                bool resetHead) {
-    if (cBuf->dataSize == 0 || length == 0)
+    if (cBuf->dataSize == 0 || length == 0) {
         return 0;
+    }
 
     size_t rdLen = length;
 
-    if (cBuf->dataSize < rdLen)
+    if (cBuf->dataSize < rdLen) {
         rdLen = cBuf->dataSize;
+    }
 
     if (cBuf->headOffset <= cBuf->tailOffset) {
         if (dataOut) {
@@ -158,12 +162,14 @@ size_t inter_circular_buf_read(cbuf_handle_t cBuf, size_t length, void *dataOut,
             }
         } else {
             size_t frg1Len = cBuf->size - cBuf->headOffset;
-            if (dataOut)
+            if (dataOut) {
                 memcpy(dataOut, &cBuf->buffer[cBuf->headOffset], frg1Len);
+            }
 
             size_t frg2len = rdLen - frg1Len;
-            if (dataOut)
+            if (dataOut) {
                 memcpy(dataOut + frg1Len, cBuf->buffer, frg2len);
+            }
 
             if (resetHead) {
                 cBuf->headOffset = frg2len;
@@ -175,8 +181,9 @@ size_t inter_circular_buf_read(cbuf_handle_t cBuf, size_t length, void *dataOut,
         }
     }
 
-    if (resetHead)
+    if (resetHead) {
         cBuf->dataSize -= rdLen;
+    }
 
     return rdLen;
 }
@@ -222,7 +229,6 @@ extern void Circular_Buf_Print(cbuf_handle_t cBuf, bool hex) {
                 sprintf(str + i * 2, "%02X|", c);
             }
         } else {
-
             sprintf(str + i * 2, "%c|", c);
         }
     }
@@ -231,4 +237,6 @@ extern void Circular_Buf_Print(cbuf_handle_t cBuf, bool hex) {
             Circular_Buf_GetSize(cBuf), Circular_Buf_GetDataSize(cBuf));
 
     free(str);
+    //
+    HexDump(cBuf->buffer, cBuf->size);
 }
