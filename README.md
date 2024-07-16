@@ -175,6 +175,7 @@ extern void Circular_Buf_Print(cbuf_handle_t cBuf, bool hex);
 **circbuf.c**
 ```C
 #include "circbuf.h"
+#include "hexdump.h"
 #include <stdbool.h>
 #include <stdlib.h>
 #include <string.h>
