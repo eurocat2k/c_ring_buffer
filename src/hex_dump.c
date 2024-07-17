@@ -20,8 +20,8 @@ void HexDump(const void *src, size_t nbytes) {
         if ((i % 8) == 0) {
             printf(" ");
         }
-        ch = data[i];
-        printf("%3.02x", ch);
+        // ch = data[i];
+        printf("%3.02x", data[i]);
 
         if (((i % 16) == 15) || (i == nbytes - 1)) {
 
@@ -32,8 +32,8 @@ void HexDump(const void *src, size_t nbytes) {
             printf(" |");
             k = 15;
             for (j = (i - (i % 16)); j <= i; j++, k--) {
-                if ((ch >= 0x21) && (ch <= 0x7e)) {
-                    printf("%c", ch);
+                if ((data[i] >= 0x21) && (data[i] <= 0x7e)) {
+                    printf("%c", data[i]);
                 } else {
                     printf("%c", '.');
                 }
@@ -56,5 +56,4 @@ void HexDump(const void *src, size_t nbytes) {
 // int main(void) {
 //     uint8_t buffer[27];
 //     HexDump(buffer, 27);
-//     return 0;
-// }
+//     return 0
