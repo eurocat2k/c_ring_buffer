@@ -1,4 +1,4 @@
-# RING BUFFER VERSION #1 *([back](README.md))*
+# RING BUFFER VERSION #1 *[(back)](README.md)*
 
 ### About 1st variant test program
 0. Create a circular buffer object - with its buffer as well - on the heap (size: 16 octets).
@@ -108,7 +108,7 @@ OFFSET 00 01 02 03 04 05 06 07   08 09 0A 0B 0C 0D 0E 0F  ASCII...........
 
 ## 1 Variant 
 
-**circbuf.h**        *([back](README.md))*
+**circbuf.h** *[(back)](README.md)*
 ```C
 #ifndef __CIRCBUF_H__
 #define __CIRCBUF_H__
@@ -171,7 +171,7 @@ extern void Circular_Buf_Print(cbuf_handle_t cBuf, bool hex);
 
 #endif // __CIRCBUF_H__
 ```
-**circbuf.c**        *([back](README.md))*
+**circbuf.c** *[(back)](README.md)*
 ```C
 #include "circbuf.h"
 #include "hexdump.h"
@@ -416,5 +416,5 @@ extern void Circular_Buf_Print(cbuf_handle_t cBuf, bool hex) {
     HexDump(cBuf->buffer, cBuf->size);
 }
 ```
-*([back](README.md))*
+*[(back)](README.md)*
 
