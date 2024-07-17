@@ -2,7 +2,7 @@
 
 ### About test program of the version #2
 0. Create a circular buffer object - with its buffer as well - on the heap (size: 16 octets).
-1. Push 5 characters into the buffer: 'A'..'E'. Display buffer's attributes and contents.
+1. Push 5 characters into the buffer: *'A'..'E'*. Display buffer's attributes and contents.
 2. Pop off 2 characters and print buffer.
 3. Push 5 characters into buffer and print.
 4. Pop off 2 characters then print.
