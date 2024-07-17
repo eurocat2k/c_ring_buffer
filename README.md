@@ -5,5 +5,7 @@ Ring buffer written In C useful ADT for system programming. In my case various T
 
 [Ring buffer verion #1](README_ringbuffer_v1.md) - 
 
+## Ring Buffer version #2
+
 [Ring buffer verion #2](README_ringbuffer_v2.md) - 
 
