@@ -30,6 +30,7 @@ OFFSET 00 01 02 03 04 05 06 07   08 09 0A 0B 0C 0D 0E 0F  ASCII...........
 
 ]
 
+Step 1: After pushed 5 characters.
 CBUF INFO: [
         TAIL OFFSET = 0
         HEAD OFFSET = 5
@@ -44,6 +45,7 @@ OFFSET 00 01 02 03 04 05 06 07   08 09 0A 0B 0C 0D 0E 0F  ASCII...........
 ]
 
         POPPED OUT DATA: ABC
+Step 2: After popped 3 characters.
 CBUF INFO: [
         TAIL OFFSET = 3
         HEAD OFFSET = 5
@@ -57,6 +59,7 @@ OFFSET 00 01 02 03 04 05 06 07   08 09 0A 0B 0C 0D 0E 0F  ASCII...........
 
 ]
 
+Step 3: After pushed 5 characters.
 CBUF INFO: [
         TAIL OFFSET = 3
         HEAD OFFSET = 10
@@ -71,6 +74,7 @@ OFFSET 00 01 02 03 04 05 06 07   08 09 0A 0B 0C 0D 0E 0F  ASCII...........
 ]
 
         POPPED OUT DATA: DE
+Step 4: After popped 2 characters.
 CBUF INFO: [
         TAIL OFFSET = 5
         HEAD OFFSET = 10
@@ -84,6 +88,7 @@ OFFSET 00 01 02 03 04 05 06 07   08 09 0A 0B 0C 0D 0E 0F  ASCII...........
 
 ]
 
+Step 5: After pushed 5 characters.
 CBUF INFO: [
         TAIL OFFSET = 5
         HEAD OFFSET = 15
@@ -97,6 +102,7 @@ OFFSET 00 01 02 03 04 05 06 07   08 09 0A 0B 0C 0D 0E 0F  ASCII...........
 
 ]
 
+Step 6: After pushed 5 characters.
 CBUF INFO: [
         TAIL OFFSET = 5
         HEAD OFFSET = 4
@@ -111,6 +117,7 @@ OFFSET 00 01 02 03 04 05 06 07   08 09 0A 0B 0C 0D 0E 0F  ASCII...........
 ]
 
         POPPED OUT DATA: FGHIJK
+Step 7: After popped 6 characters.
 CBUF INFO: [
         TAIL OFFSET = 11
         HEAD OFFSET = 4
@@ -125,6 +132,7 @@ OFFSET 00 01 02 03 04 05 06 07   08 09 0A 0B 0C 0D 0E 0F  ASCII...........
 ]
 
         POPPED OUT DATA: LMNOPQ
+Step 8: After popped 6 characters.
 CBUF INFO: [
         TAIL OFFSET = 1
         HEAD OFFSET = 4
@@ -139,6 +147,7 @@ OFFSET 00 01 02 03 04 05 06 07   08 09 0A 0B 0C 0D 0E 0F  ASCII...........
 ]
 
         POPPED OUT DATA: RSO
+Step 9: After popped 3 characters.
 CBUF INFO: [
         TAIL OFFSET = 4
         HEAD OFFSET = 4
