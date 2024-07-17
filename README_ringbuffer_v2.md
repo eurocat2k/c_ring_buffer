@@ -102,16 +102,16 @@ OFFSET 00 01 02 03 04 05 06 07   08 09 0A 0B 0C 0D 0E 0F  ASCII...........
 
 ]
 
-Step 6: After pushed 5 characters.
+Step 6: After pushed 4 characters.
 CBUF INFO: [
         TAIL OFFSET = 5
-        HEAD OFFSET = 4
-        DATA SIZE   = 15
+        HEAD OFFSET = 3
+        DATA SIZE   = 14
         SIZE MASK   = 0x0F
 ====== =======================   =======================  ================
 OFFSET 00 01 02 03 04 05 06 07   08 09 0A 0B 0C 0D 0E 0F  ASCII...........
 ====== =======================   =======================  ================
-000000 51 52 53 4F 00 46 47 48   49 4A 4B 4C 4D 4E 4F 50  QRSO.FGHIJKLMNOP                                                      
+000000 51 52 53 00 00 46 47 48   49 4A 4B 4C 4D 4E 4F 50  QRS..FGHIJKLMNOP                                                      
 ====== =======================   =======================  ================
 
 ]
@@ -120,13 +120,13 @@ OFFSET 00 01 02 03 04 05 06 07   08 09 0A 0B 0C 0D 0E 0F  ASCII...........
 Step 7: After popped 6 characters.
 CBUF INFO: [
         TAIL OFFSET = 11
-        HEAD OFFSET = 4
-        DATA SIZE   = 9
+        HEAD OFFSET = 3
+        DATA SIZE   = 8
         SIZE MASK   = 0x0F
 ====== =======================   =======================  ================
 OFFSET 00 01 02 03 04 05 06 07   08 09 0A 0B 0C 0D 0E 0F  ASCII...........
 ====== =======================   =======================  ================
-000000 51 52 53 4F 00 00 00 00   00 00 00 4C 4D 4E 4F 50  QRSO.......LMNOP                                                      
+000000 51 52 53 00 00 00 00 00   00 00 00 4C 4D 4E 4F 50  QRS........LMNOP                                                      
 ====== =======================   =======================  ================
 
 ]
@@ -135,22 +135,22 @@ OFFSET 00 01 02 03 04 05 06 07   08 09 0A 0B 0C 0D 0E 0F  ASCII...........
 Step 8: After popped 6 characters.
 CBUF INFO: [
         TAIL OFFSET = 1
-        HEAD OFFSET = 4
-        DATA SIZE   = 3
+        HEAD OFFSET = 3
+        DATA SIZE   = 2
         SIZE MASK   = 0x0F
 ====== =======================   =======================  ================
 OFFSET 00 01 02 03 04 05 06 07   08 09 0A 0B 0C 0D 0E 0F  ASCII...........
 ====== =======================   =======================  ================
-000000 00 52 53 4F 00 00 00 00   00 00 00 00 00 00 00 00  .RSO............                                                      
+000000 00 52 53 00 00 00 00 00   00 00 00 00 00 00 00 00  .RS.............                                                      
 ====== =======================   =======================  ================
 
 ]
 
-        POPPED OUT DATA: RSO
-Step 9: After popped 3 characters.
+        POPPED OUT DATA: RS
+Step 9: After popped 2 characters.
 CBUF INFO: [
-        TAIL OFFSET = 4
-        HEAD OFFSET = 4
+        TAIL OFFSET = 3
+        HEAD OFFSET = 3
         DATA SIZE   = 0
         SIZE MASK   = 0x0F
 ====== =======================   =======================  ================
