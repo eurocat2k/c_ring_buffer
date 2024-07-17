@@ -163,7 +163,7 @@ OFFSET 00 01 02 03 04 05 06 07   08 09 0A 0B 0C 0D 0E 0F  ASCII...........
 
 ```
 
-**circbufmod.h** [back](README.md)
+**circbufmod.h** ([back](README.md))
 ```c
 #ifndef __CIRCBUFMOD_H__
 #define __CIRCBUFMOD_H__
@@ -306,7 +306,7 @@ bool Circular_Buf_Modulo_Peek(cbuf_mod_handle_t cbuf, void *dst,
 
 #endif // __CIRCBUFMOD_H__
 ```
-**circbufmod.c** [back](README.md)
+**circbufmod.c** ([back](README.md))
 ```c
 // !! Under construction
 #include "circbufmod.h"
@@ -492,4 +492,4 @@ void Circular_Buf_Modulo_Display(cbuf_mod_handle_t cbuf, bool dump) {
     fprintf(stdout, "]\n\n");
 }
 ```
-[back](README.md)
+([back](README.md))
