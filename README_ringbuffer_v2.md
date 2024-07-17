@@ -1,4 +1,4 @@
-# RING BUFFER VERSION #2 [back](README.md)
+# RING BUFFER VERSION #2 ***([back](README.md))***
 
 ### About test program of the version #2
 0. Create a circular buffer object - with its buffer as well - on the heap (size: 16 octets).
