@@ -32,8 +32,8 @@ void HexDump(const void *src, size_t nbytes) {
             printf(" |");
             k = 15;
             for (j = (i - (i % 16)); j <= i; j++, k--) {
-                if ((data[i] >= 0x21) && (data[i] <= 0x7e)) {
-                    printf("%c", data[i]);
+                if ((data[j] >= 0x21) && (data[j] <= 0x7e)) {
+                    printf("%c", data[j]);
                 } else {
                     printf("%c", '.');
                 }
