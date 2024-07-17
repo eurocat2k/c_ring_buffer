@@ -21,15 +21,15 @@ int main(void) {
     in[4] = 'E';
     Circular_Buf_Push(cbuf, in, 5);
     // print buffer attributes
-    printf("0. Size: %zu, Usage: %zu\n", Circular_Buf_GetCapacity(cbuf),
+    printf("Step 1: After pushed 5 characters. Size: %zu, Usage: %zu\n", Circular_Buf_GetCapacity(cbuf),
            Circular_Buf_GetDataSize(cbuf));
     // display content of the buffer
     Circular_Buf_Print(cbuf, false);
     // pop off first 3 chars
     Circular_Buf_Pop(cbuf, 3, out);
-    printf("1. Size: %zu, Usage: %zu\n", Circular_Buf_GetCapacity(cbuf),
+    printf("Step 2: After popped off 3 characters. Size: %zu, Usage: %zu\n", Circular_Buf_GetCapacity(cbuf),
            Circular_Buf_GetDataSize(cbuf));
-    printf("\tpopped out: %.*s\n", 3, out);
+    printf("\tpopped out: [ %.*s ]\n", 3, out);
     // display content of the buffer
     Circular_Buf_Print(cbuf, false);
     // push another 5 octets
@@ -39,15 +39,15 @@ int main(void) {
     in[3] = 'I';
     in[4] = 'J';
     Circular_Buf_Push(cbuf, in, 5);
-    printf("1. Size: %zu, Usage: %zu\n", Circular_Buf_GetCapacity(cbuf),
+    printf("Step 3: After pushed another 5 characters. Size: %zu, Usage: %zu\n", Circular_Buf_GetCapacity(cbuf),
            Circular_Buf_GetDataSize(cbuf));
     // display content of the buffer
     Circular_Buf_Print(cbuf, false);
     // pop off first 2 chars
     Circular_Buf_Pop(cbuf, 2, out);
-    printf("2. Size: %zu, Usage: %zu\n", Circular_Buf_GetCapacity(cbuf),
+    printf("Step 4: After popped off 2 characters. Size: %zu, Usage: %zu\n", Circular_Buf_GetCapacity(cbuf),
            Circular_Buf_GetDataSize(cbuf));
-    printf("\tpopped out: %.*s\n", 2, out);
+    printf("\tpopped out: [ %.*s ]\n", 2, out);
     // display content of the buffer
     Circular_Buf_Print(cbuf, false);
     // push another 5 characters
@@ -57,7 +57,7 @@ int main(void) {
     in[3] = 'N';
     in[4] = 'O';
     Circular_Buf_Push(cbuf, in, 5);
-    printf("3. Size: %zu, Usage: %zu\n", Circular_Buf_GetCapacity(cbuf),
+    printf("Step 5: After pushed another 5 characters. Size: %zu, Usage: %zu\n", Circular_Buf_GetCapacity(cbuf),
            Circular_Buf_GetDataSize(cbuf));
     // display content of the buffer
     Circular_Buf_Print(cbuf, false);
@@ -67,29 +67,29 @@ int main(void) {
     in[2] = 'R';
     in[3] = 'S';
     Circular_Buf_Push(cbuf, in, 4);
-    printf("4. Size: %zu, Usage: %zu\n", Circular_Buf_GetCapacity(cbuf),
+    printf("Step 6: And Another 4 characters pushed into. Size: %zu, Usage: %zu\n", Circular_Buf_GetCapacity(cbuf),
            Circular_Buf_GetDataSize(cbuf));
     // display content of the buffer
     Circular_Buf_Print(cbuf, false);
     // pop off 6 characters
     Circular_Buf_Pop(cbuf, 6, out);
-    printf("5. Size: %zu, Usage: %zu\n", Circular_Buf_GetCapacity(cbuf),
+    printf("Step 7: After popped out 6 characters. Size: %zu, Usage: %zu\n", Circular_Buf_GetCapacity(cbuf),
            Circular_Buf_GetDataSize(cbuf));
-    printf("\tpopped out: %.*s\n", MAX_INPUT, out);
+    printf("\tpopped out: [ %.*s ]\n", MAX_INPUT, out);
     // display content of the buffer
     Circular_Buf_Print(cbuf, false);
     // pop off 5 characters
     Circular_Buf_Pop(cbuf, 6, out);
-    printf("6. Size: %zu, Usage: %zu\n", Circular_Buf_GetCapacity(cbuf),
+    printf("Step 8: After popped out 6 characters. Size: %zu, Usage: %zu\n", Circular_Buf_GetCapacity(cbuf),
            Circular_Buf_GetDataSize(cbuf));
-    printf("\tpopped out: %.*s\n", 6, out);
+    printf("\tpopped out: [ %.*s ]\n", 6, out);
     // display content of the buffer
     Circular_Buf_Print(cbuf, false);
     // pop off remaining characters
     Circular_Buf_Pop(cbuf, Circular_Buf_GetDataSize(cbuf), out);
-    printf("7. Size: %zu, Usage: %zu\n", Circular_Buf_GetCapacity(cbuf),
+    printf("Step 9: After popped out the remaining characters. Size: %zu, Usage: %zu\n", Circular_Buf_GetCapacity(cbuf),
            Circular_Buf_GetDataSize(cbuf));
-    printf("\tpopped out: %.*s\n", 2, out);
+    printf("\tpopped out: [ %.*s ]\n", 2, out);
     // display content of the buffer
     Circular_Buf_Print(cbuf, false);
     //

@@ -10,24 +10,31 @@
 #define ASCII_BUF_SIZE  16
 #endif // ASCII_BUF_SIZE
 
-void HexDump(void *src, size_t len) {
+void HexDump(const void *src, size_t len) {
     bool odd = true;
-    char ch;
+    char ch = '\0';
+    int wch = 0;
     size_t offset = 0, size = len, left = size;
-    uint8_t *data = (uint8_t *)src, asciibuf[ASCII_BUF_SIZE + 1] = {0};
-    int lencnt = 0, index = 0;
+    uint8_t *data = NULL;
+    data = (uint8_t *)src;
+    uint8_t asciibuf[ASCII_BUF_SIZE + 1] = {0};
+    int lencnt = 0;
+    // , index = 0;
 
     // header
     //               00000 4C 6F 72 65 6D 20 49 70   73 75 6D 20 69 73 20 73  Lorem Ipsum is s
     fprintf(stdout, "====== =======================   =======================  ================\n");
     fprintf(stdout, "OFFSET 00 01 02 03 04 05 06 07   08 09 0A 0B 0C 0D 0E 0F  ASCII...........\n");
     fprintf(stdout, "====== =======================   =======================  ================\n");
+    // fprintf(stdout, "[%zu] %06X", left, (unsigned)offset);
     fprintf(stdout, "%06X", (unsigned)offset);
+    //
 
     // outer loop
-    for (size_t i = 0; i < size; i += 1, left -= 1) {
-        ch = *(data + i);
+    for (size_t i = 0, index = 0; i < size; i += 1, left -= 1) {
+        ch = *(uint8_t*)(src + i);
         asciibuf[index++] = ch;
+        // fprintf(stdout, "%3.02X", ch);
         fprintf(stdout, "%3.02X", ch);
         lencnt += 1;
         if (((i + 1) % 8) == 0) {
@@ -38,16 +45,21 @@ void HexDump(void *src, size_t len) {
                 index = 0;
                 offset += 16;
                 fprintf(stdout, "  ");
-                for (int k = 0; k < 16; k += 1) {
-                    if (isalnum(asciibuf[k]) ||
-                        ispunct(asciibuf[k]) ||
-                        isspace(asciibuf[k])) {
+                // memset(asciibuf, 0, ASCII_BUF_SIZE);
+                for (size_t k = 0; k < 16; k += 1) {
+                    int _ch = asciibuf[k];
+                    if (isalnum(_ch) ||
+                        ispunct(_ch) ||
+                        isspace(_ch)) {
                         fprintf(stdout, "%c", asciibuf[k]);
                     } else {
                         fprintf(stdout, ".");
                     }
                 }
-                fprintf(stdout, "\n%06X", (unsigned)offset);
+                if (left > 1) {
+                    // fprintf(stdout, "\n[%zu] %06X", left, (unsigned)offset);
+                    fprintf(stdout, "\n%06X", (unsigned)offset);
+                }
                 odd = true;
                 lencnt = 0;
             }
