@@ -22,14 +22,14 @@ Ring buffer written In C useful ADT for system programming. In my case various T
 ```
   We pop off 3 characters, then the following events happen:
   
-  Step one: pop off characters
+  **Step one**: pop off characters
 ```
   Buffer: [ | | |D|E| | | ]
                  ^   ^
                  |   head index
                  tail index
 ```
-  Step two: relocate remaining chunk to the buffer's beginning. Then set the new indexes for both *tail* and *head*.
+  **Step two**: relocate remaining chunk to the buffer's beginning. Then set the new indexes for both *tail* and *head*.
 ```
   Buffer: [D|E| | | | | | ]
            ^   ^
