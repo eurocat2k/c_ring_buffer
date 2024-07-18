@@ -24,8 +24,8 @@
   |    tail     |  <= size_t         |
   |-------------|                    |
   |    head     |  <= size_t         |
-  |-------------| <-----------------/  
-  |    data     |  <= (void *) or (uint8_t *) pointer 
+  |-------------| <-----------------/
+  |    data     |  <= (void *) or (uint8_t *) pointer
   |-------------| cbuf->data = cbuf + offset
   |     ...     |
   |-------------|
@@ -49,5 +49,5 @@ cbuf object (with attributes only):
   |    data     |  <= (void *) or (uint8_t *) pointer
   +-------------+
 ```
-> In the first case **valgrind** reports memory leaks due tu uninitialized heap allocation, the second case there is
-  no error. 
+> In the first case **valgrind** reports memory leaks due to uninitialized heap allocation, the second case there is
+  no error.
