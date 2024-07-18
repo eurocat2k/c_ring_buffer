@@ -48,15 +48,24 @@ cbuf_mod_handle_t Circular_Buf_Modulo_Create(size_t size) {
     }
     // try to allocate
     size_t _totalSize = sizeof(struct cbuf_mod_t) + _size;
-    _cbuf = (struct cbuf_mod_t *)malloc(_totalSize);
+    // _cbuf = (struct cbuf_mod_t *)malloc(_totalSize);
+    _cbuf = (struct cbuf_mod_t *)malloc(sizeof(struct cbuf_mod_t));
+    // _cbuf = (struct cbuf_mod_t *)calloc(_totalSize, sizeof(uint8_t));
     if (NULL == _cbuf) {
         perror("Memory alloaction failed");
         return _cbuf;
     }
+    memset(_cbuf, 0, sizeof(struct cbuf_mod_t));
     Circular_Buf_Modulo_Reset(_cbuf);
     _cbuf->maxCapacity = _size;
     _cbuf->sizeMask = _size - 1;
-    _cbuf->data = (void *)(_cbuf + sizeof(struct cbuf_mod_t));
+    _cbuf->data = (uint8_t *)calloc(_size, sizeof(uint8_t));
+    if (NULL == _cbuf->data) {
+        free(_cbuf);
+        _cbuf = NULL;
+    }
+    // _cbuf->data = (void *)(_cbuf + sizeof(struct cbuf_mod_t));
+    // memset(_cbuf->data, 0, _size);
     return _cbuf;
 }
 
@@ -68,6 +77,10 @@ void Circular_Buf_Modulo_Reset(cbuf_mod_handle_t cBuf) {
 
 void Circular_Buf_Modulo_Free(cbuf_mod_handle_t cbuf) {
     if (NULL != cbuf) {
+        if (cbuf->data) {
+            free(cbuf->data);
+            cbuf->data = NULL;
+        }
         free(cbuf);
     }
 }
@@ -87,9 +100,10 @@ void Circular_Buf_Modulo_Put(cbuf_mod_handle_t cbuf, uint8_t data) {
 void Circular_Buf_Modulo_Push(cbuf_mod_handle_t cbuf, void *data,
                               size_t nbytes) {
     uint8_t octet = 0;
+    uint8_t *data_ptr = (uint8_t *)data;
     if (nbytes) {
         for (size_t i = 0; i < nbytes; i += 1) {
-            octet = *(uint8_t *)(data + i);
+            octet = data_ptr[i];
             Circular_Buf_Modulo_Put(cbuf, octet);
         }
     }
