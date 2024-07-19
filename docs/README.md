@@ -113,7 +113,7 @@ Which shall result of an empty buffer of course.
 
 ## To prove this
 If you would like to be absolute sure wether it's working and safe or not, please 
-do the push operations with only one octet at a time for each cases. And follow the rule below:
+execute those operations with only one octet at a time for each cases. And follow the rule below:
 ```
   for pushing:  new HEAD = (old HEAD + 1) & MS
   repeat this step required times as you can see above.
