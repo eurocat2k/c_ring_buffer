@@ -43,7 +43,7 @@ Ring buffer written In C useful ADT for system programming. In my case various T
   So, every time - after a *POP* action, the *tail* index going to be set to 0 - beginning the buffer - and set the
   *head* index set to the appropriate distance from tail - as buffer's dataSize dictates.
 
-## Ring Buffer version #2
+## Ring Buffer version #2 (*[Description](./docs/README.md)*)
 
 [Ring buffer verion #2](README_ringbuffer_v2.md) - uses buffer size strictly aligned to 2^N - where N >= 3. - (*8, 16, 32 .. 65536*)
 
