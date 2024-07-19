@@ -108,5 +108,5 @@ AND  01111111  <- MS
 --------------
      00000001  <- new HEAD
 ```
-Pleas not that maximum *remaining* number of octets should be popped out!
+Please not that maximum *remaining* number of octets should be popped out!
 Whic shall result of an empty buffer of course.
