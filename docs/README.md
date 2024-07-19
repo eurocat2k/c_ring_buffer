@@ -110,3 +110,14 @@ AND  01111111  <- MS
 ```
 Please note that maximum *remaining* number of octets should be popped out!
 Which shall result of an empty buffer of course.
+
+## To prove this
+If you would like to be absolute sure wether it's working and safe or not, please 
+do the push operations with only one octet at a time for each cases. And follow the rule below:
+```
+  for pushing:  new HEAD = (old HEAD + 1) & MS
+  repeat this step required times as you can see above.
+
+  for pop operation: new TAIL = (old TAIL + 1) & MS
+  repeat this step required times as you can see above.
+```
