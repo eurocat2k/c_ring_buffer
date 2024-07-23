@@ -13,7 +13,7 @@
 
 struct trk_status_t {
     union {
-        uint_least8_t octets[MAX_STATUS_OCTETS];
+        uint8_t octets[MAX_STATUS_OCTETS];
         // 1st octet
         struct {
             // 1st octet
