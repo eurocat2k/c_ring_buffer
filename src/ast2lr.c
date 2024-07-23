@@ -97,20 +97,58 @@ struct ast_to_lr_t {
     struct trk_status_t status;
 };
 
-uint_least16_t MatXY_To_LRXY(double v) {
-    uint_least16_t ret = 0;
-    double tmp = 0.0, val = 0.0, coef = pow(2.0, -6.0) * NAUTICAL_MILE;
+uint16_t MatXY_To_LRXY(double v) {
+    uint16_t ret = 0;
+    const double coef = pow(2.0, -6.0);
+    // const double coef = 1.0 / 64.0;
+    double tmp = 0.0, val = 0.0, aval = fabs(v) * M_TO_NM;
+    uint16_t mask = 0x4000;
     printf("coef = %f, v = %f\n", coef, v);
+    for (double i = 14.0; i > 0.0; i -= 1.0) {
+        tmp = pow(2.0, i) * coef;
+        if ((val + tmp) <= aval)
+        {
+            ret |= mask;
+            val += tmp;
+        }
+        printf("tmp = %f, val = %f, aval = %f [%04x]\n", tmp, val, aval, ret);
+        mask >>= 1;
+    }
+    if (v < 0.0) {
+        ret = ~ret;
+        ret += 1;
+    }
+    printf("!!tmp = %f, val = %f, aval = %f [%04x]!!\n", tmp, val, aval, ret);
     return ret;
 }
 
-uint_least16_t MatDXY_To_LRDXY(double v) {
-    uint_least16_t ret = 0;
+uint16_t MatDXY_To_LRDXY(double v) {
+    uint16_t ret = 0;
+    const double coef = pow(2.0, -22.0) / pow(10.0, -2.0);
+    double nmps = v * MPS_TO_NMPS, anmps = fabs(v * MPS_TO_NMPS), val = 0.0, tmp = 0.0;
+    uint16_t mask = 4000;
+    printf("v = %f, nmps = %f, anmps = %f\n", v, nmps, anmps);
+    for (double i = 14.0; i >= 0; i -= 1.0) {
+        tmp = pow(2.0, i) * coef;
+        if (anmps >= (val + tmp)) {
+            ret |= mask;
+            val += tmp;
+        }
+        mask >>= 1;
+    }
+    if (v < 0.0) {
+        ret = ~ret;
+        ret += 1;
+    }
     return ret;
 }
 
-uint_least16_t MatLVL_ToLRLVL(uint16_t mfl) {
-    uint_least16_t ret = 0;
+uint16_t MatLVL_ToLRLVL(uint16_t mfl) {
+    uint16_t ret = 0;
+    printf("%04x (%u)\n", mfl, mfl);
+    double fl = (double)mfl * pow(2.0, -2.0);
+    printf("fl = %f, mfl = %u\n", fl, (mfl >> 2));
+    ret = mfl >> 2;
     return ret;
 }
 
@@ -137,15 +175,15 @@ int Convert_ASTCAT62_TO_LRTGT(const void *sdata, void *dst) {
     // put a space
     offset += (size_t)snprintf((char *)(ptr + offset), strlen(" ") + 1, " ");
     // put DX value calling MatXY_To_LRDXY function on X
-    offset += (size_t)snprintf((ptr + offset), 5 + 1, "%05u", MatDXY_To_LRDXY(ast->x));
+    offset += (size_t)snprintf((ptr + offset), 5 + 1, "%05u", MatDXY_To_LRDXY(ast->dx));
     // put a space
     offset += (size_t)snprintf((char *)(ptr + offset), strlen(" ") + 1, " ");
     // put DY value calling MatXY_To_LRDXY function on X
-    offset += (size_t)snprintf((ptr + offset), 5 + 1, "%05u", MatDXY_To_LRDXY(ast->y));
+    offset += (size_t)snprintf((ptr + offset), 5 + 1, "%05u", MatDXY_To_LRDXY(ast->dy));
     // put a space
     offset += (size_t)snprintf((char *)(ptr + offset), strlen(" ") + 1, " ");
     // put LVL value calling MatLVL_To_LRLVL function on X
-    offset += (size_t)snprintf((ptr + offset), 3 + 1, "%03d", MatLVL_ToLRLVL(ast->y));
+    offset += (size_t)snprintf((ptr + offset), 3 + 1, "%03d", MatLVL_ToLRLVL(ast->mfl));
     // put a space
     offset += (size_t)snprintf((char *)(ptr + offset), strlen(" ") + 1, " ");
     // put out squawk
@@ -234,6 +272,8 @@ int main(void) {
     ast.icaoaddr[2] = 0x04;
     // modeC
     ast.squawk.mod3a.short_value = 0x16b7;
+    // mfl
+    ast.mfl = 0x0582;
     // x
     ast.x = 15688.5;
     // y

@@ -29,4 +29,4 @@ extern "C" {
 }
 #endif
 
-#endif // __GEOM_H__
+#endif  /* __GEOM_H__ */
