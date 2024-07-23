@@ -1,3 +1,4 @@
+
 #ifndef __HEXDUMP_H__
 #define __HEXDUMP_H__
 
@@ -5,10 +6,12 @@
 extern "C" {
 #endif
 
+#include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
 
-void HexDump(void *src, size_t len);
+void HexDump(const void *src, size_t len);
+void HexDump2(const uint8_t *src, size_t len);
 
 #ifdef __cplusplus
 }

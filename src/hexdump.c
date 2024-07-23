@@ -3,7 +3,6 @@
 #include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <sys/endian.h>
 #include <unistd.h>
 
 #ifndef MIN_ASCII_CHAR
@@ -25,7 +24,7 @@ void HexDump(const void *src, size_t nbytes) {
     for (i = 0; i < nbytes; i++) {
         // ch = data[i];
         if ((i % 16) == 0) {
-            printf("%08lx", i);
+            printf("%08zx", i);
         }
         if ((i % 8) == 0) {
             printf(" ");
@@ -36,6 +35,11 @@ void HexDump(const void *src, size_t nbytes) {
 
             for (j = 0; j < 15 - (i % 16); j++) {
                 printf("   ");
+            }
+
+            // extra gap if last chunk is less than 8 octets long
+            if (15 - (i % 16) >= 8) {
+                printf (" ");
             }
 
             printf(" |");

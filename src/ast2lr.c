@@ -1,13 +1,13 @@
+#include "ast2lr.h"
+#include "geom.h"
+#include "hexdump.h"
+#include <errno.h>
+#include <string.h>
+#include <math.h>
+#include <stddef.h>
+#include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <stdint.h>
-#include <stddef.h>
-#include <errno.h>
-#include <sys/endian.h>
-#include <string.h>
-#include "ast2lr.h"
-#include "hexdump.h"
-
 
 #pragma scalar_storage_order default
 
@@ -55,7 +55,7 @@ struct trk_status_t {
             uint8_t ems : 3;
             uint8_t sds : 2; // MSB
         } __attribute__((packed)) bf1;
-        // 
+        //
     } status;
 } __attribute__((packed));
 
@@ -99,6 +99,8 @@ struct ast_to_lr_t {
 
 uint_least16_t MatXY_To_LRXY(double v) {
     uint_least16_t ret = 0;
+    double tmp = 0.0, val = 0.0, coef = pow(2.0, -6.0) * NAUTICAL_MILE;
+    printf("coef = %f, v = %f\n", coef, v);
     return ret;
 }
 

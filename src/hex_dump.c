@@ -15,7 +15,7 @@ void HexDump(const void *src, size_t nbytes) {
     for (i = 0; i < nbytes; i++)
     {
         if ((i % 16) == 0) {
-            printf("%08lx", i);
+            printf("%08zx", i);
         }
         if ((i % 8) == 0) {
             printf(" ");

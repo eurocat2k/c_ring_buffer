@@ -56,4 +56,4 @@ int Convert_ASTCAT65_TO_LRNS(const void *sdata, void *dst);
 }
 #endif
 
-#endif // __AST2LR_H__
+#endif  /* __AST2LR_H__ */
